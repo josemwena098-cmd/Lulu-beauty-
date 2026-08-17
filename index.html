@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LULU BEAUTY - Vipodozi Bora Dar</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <h1>LULU BEAUTY</h1>
+    <p>Vipodozi vya Kipekee | Dar es Salaam 🇹🇿</p>
+  </header>
+
+  <main class="container">
+    <h2 class="title">Bidhaa Zetu</h2>
+    <p class="subtitle">Chagua urembo wako kutoka kwetu</p>
+    <div id="bidhaaGrid" class="grid"><p style="text-align:center;">Inapakia bidhaa...</p></div>
+  </main>
+
+  <button id="chatBtn" class="chat-float">💬 Chat Nasi</button>
+  <div id="chatBox" class="chat-popup hidden">
+    <div class="chat-header">Ongea na Msaada wa LULU</div>
+    <div id="chatMessages" class="chat-messages"></div>
+    <div class="chat-input">
+      <input id="chatInput" placeholder="Andika swali lako...">
+      <button onclick="tumaUjumbe()">Tuma</button>
+    </div>
+  </div>
+
+  <footer><p>© 2026 LULU BEAUTY. All Rights Reserved.</p></footer>
+
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyDbYznd_wEyJPr_r1mnvUEy651QPhhk4TI",
+  authDomain: "teknova-3688d.firebaseapp.com",
+  databaseURL: "https://teknova-3688d-default-rtdb.firebaseio.com",
+  projectId: "teknova-43688d",
+  storageBucket: "teknova-3688d.firebasestorage.app",
+  messagingSenderId: "1030215294939",
+  appId: "1:1030215294939:web:4d82493402600f4285d1fe"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+const nambaYaDuka = "255712345678";
+
+function somaBidhaa(){
+  db.ref('bidhaa').on('value', (snapshot)=>{
+    const data = snapshot.val();
+    const grid = document.getElementById('bidhaaGrid');
+    grid.innerHTML = "";
+    if(data){
+      Object.keys(data).forEach(key=>{
+        let b = data[key];
+        grid.innerHTML += `
+        <div class="card">
+          <img src="${b.picha}">
+          <div class="card-body">
+            <h3>${b.jina}</h3>
+            <p class="bei">Tsh ${Number(b.bei).toLocaleString()}</p>
+            <a href="https://wa.me/${nambaYaDuka}?text=Nataka ${b.jina}" target="_blank">
+              <button class="btn-whatsapp">Oda WhatsApp</button>
+            </a>
+          </div>
+        </div>`;
+      })
+    }else{ grid.innerHTML = "<p style='text-align:center;'>Bado hakuna bidhaa. Admin anaongeza.</p>" }
+  })
+}
+
+document.getElementById('chatBtn').onclick = () => document.getElementById('chatBox').classList.toggle('hidden');
+function tumaUjumbe(){
+  let msg = document.getElementById('chatInput').value;
+  if(msg == "") return;
+  db.ref('chat').push({ ujumbe: msg, mtumaji: "Mteja", time: Date.now() });
+  document.getElementById('chatInput').value = "";
+}
+db.ref('chat').on('child_added', (snapshot)=>{
+  let data = snapshot.val();
+  let div = document.createElement('div');
+  div.className = 'msg ' + (data.mtumaji == "Mteja"? 'msg-me' : 'msg-admin');
+  div.innerText = data.ujumbe;
+  document.getElementById('chatMessages').appendChild(div);
+  document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
+})
+somaBidhaa();
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin - LULU BEAUTY</title>
+<link rel="stylesheet" href="style.css">
+<style>
+body{ background: var(--gray); padding: 30px; }
+.admin-wrap{ max-width: 900px; margin: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+.admin-card{ background: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+.admin-card h2{ color: var(--pink-dark); margin-bottom: 20px; font-family: 'Playfair Display', serif; }
+input{ width:100%; padding:12px; margin:8px 0; border:1px solid #ddd; border-radius: 8px; }
+.btn-save{ width:100%; padding:12px; background:var(--gold); border:none; color:white; font-weight:700; border-radius: 8px; cursor:pointer; }
+#adminChat{ height:300px; border:1px solid #ddd; overflow-y:scroll; padding:10px; background: var(--gray); border-radius: 8px; }
+</style>
+</head>
+<body>
+<h1 style="text-align:center; color: var(--pink-dark); margin-bottom: 30px;">LULU BEAUTY - Admin Panel</h1>
+<div class="admin-wrap">
+  <div class="admin-card">
+    <h2>Ongeza Bidhaa Mpya</h2>
+    <input id="jina" placeholder="Jina la Bidhaa">
+    <input id="bei" placeholder="Bei Tsh" type="number">
+    <input id="picha" placeholder="Link ya Picha">
+    <button onclick="hifadhiBidhaa()" class="btn-save">Hifadhi Bidhaa</button>
+  </div>
+  <div class="admin-card">
+    <h2>Chat na Wateja</h2>
+    <div id="adminChat"></div>
+    <div style="display:flex; margin-top:10px;">
+      <input id="adminInput" placeholder="Jibu mteja..." style="flex:1;">
+      <button onclick="jibuMteja()" style="background:var(--pink); color:white; border:none; padding:10px 15px; cursor:pointer;">Tuma</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+<script>
+const firebaseConfig = {...}; // WEKA ILE ILE CONFIG YA JUU
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+function hifadhiBidhaa(){
+  db.ref('bidhaa').push({
+    jina: document.getElementById('jina').value,
+    bei: document.getElementById('bei').value,
+    picha: document.getElementById('picha').value
+  });
+  alert("Bidhaa Imehifadhiwa!");
+}
+
+function jibuMteja(){
+  let msg = document.getElementById('adminInput').value;
+  db.ref('chat').push({ ujumbe: msg, mtumaji: "Admin", time: Date.now() });
+  document.getElementById('adminInput').value = "";
+}
+
+db.ref('chat').on('child_added', (s)=>{
+  let d = s.val();
+  document.getElementById('adminChat').innerHTML += `<p><b style="color:var(--pink);">${d.mtumaji}:</b> ${d.ujumbe}</p>`;
+  document.getElementById('adminChat').scrollTop = document.getElementById('adminChat').scrollHeight;
+})
+</script>
+</body>
+</html>
