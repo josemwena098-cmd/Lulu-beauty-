@@ -12,7 +12,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
-const nambaYaDuka = "255712345678"; // WEKA NAMBA YA LULU HAPA
+const nambaYaDuka = "+255 724 331 379"; // WEKA NAMBA YA LULU HAPA
 
 // 2. SOMA BIDHAA KUTOKA FIREBASE
 function somaBidhaa(){
