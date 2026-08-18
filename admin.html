@@ -2,100 +2,52 @@
 <html lang="sw">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LULU BEAUTY - Admin Dashboard</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-
 <style>
-:root{
-  --pink: #D81B60;
-  --pink-dark: #880E4F;
-  --gold: #C8A165;
-  --white: #FFFFFF;
-  --gray: #F4F4F4;
-  --text: #333;
-}
-*{ margin:0; padding:0; box-sizing:border-box; font-family: 'Poppins', sans-serif; }
-body{ background: var(--gray); }
-
-.header{
-  background: var(--pink-dark); color: white; padding: 20px 30px;
-  display: flex; justify-content: space-between; align-items: center;
-}
-.header h1{ font-family: 'Playfair Display', serif; font-size: 1.8rem; }
-
-.container{
-  max-width: 1200px; margin: 30px auto; padding: 0 20px;
-  display: grid; grid-template-columns: 1fr 1.5fr; gap: 30px;
-}
-.card{
-  background: var(--white); padding: 25px; border-radius: 15px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-}
-.card h2{ color: var(--pink-dark); margin-bottom: 20px; font-size: 1.4rem; }
-input{ width:100%; padding:12px; margin:8px 0; border:1px solid #ddd; border-radius: 8px; outline: none; }
-input:focus{ border-color: var(--pink); }
-.btn{
-  width:100%; padding:14px; background:var(--gold); border:none; color:white;
-  font-weight:700; border-radius: 8px; cursor:pointer; margin-top: 10px;
-}
-.btn:hover{ background: #b08a52; }
-
-.chat-box{ height:400px; border:1px solid #ddd; overflow-y:scroll; padding:15px; background: var(--gray); border-radius: 8px; margin-bottom: 10px; }
-.chat-send{ display: flex; }
-.chat-send input{ flex:1; margin-right: 10px; }
-.chat-send button{ background:var(--pink); color:white; border:none; padding:12px 20px; border-radius: 8px; cursor:pointer; font-weight: 600; }
-
-.msg{ margin: 8px 0; padding: 10px 15px; border-radius: 15px; max-width: 80%; font-size: 0.9rem; }
-.msg-me{ background: var(--pink); color: white; margin-left: auto; }
-.msg-mteja{ background: #E0E0E0; margin-right: auto; }
-
-#bidhaaList{ max-height: 300px; overflow-y: auto; }
-.bidhaa-item{
-  display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #eee;
-}
-.bidhaa-item button{
-  background: red; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer;
-}
+:root{ --pink: #D81B60; --pink-dark: #880E4F; --gold: #C8A165; --white: #FFFFFF; --gray: #F4F4F4; }
+body{ background: var(--gray); font-family: 'Poppins', sans-serif; }
+.header{ background: var(--pink-dark); color: white; padding: 20px 30px; display: flex; justify-content: space-between; }
+.container{ max-width: 1200px; margin: 30px auto; padding: 0 20px; display: grid; grid-template-columns: 1fr 1.5fr; gap: 30px; }
+.card{ background: var(--white); padding: 25px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+.card h2{ color: var(--pink-dark); margin-bottom: 20px; }
+input{ width:100%; padding:12px; margin:8px 0; border:1px solid #ddd; border-radius: 8px; }
+.btn{ width:100%; padding:14px; background:var(--gold); border:none; color:white; font-weight:700; border-radius: 8px; cursor:pointer; }
+.chat-box{ height:400px; border:1px solid #ddd; overflow-y:scroll; padding:15px; background: var(--gray); border-radius: 8px; }
+.bidhaa-item{ display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #eee; }
+.bidhaa-item button{ background: red; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; }
 </style>
 </head>
 <body>
-
   <div class="header">
     <h1>LULU BEAUTY Admin</h1>
     <a href="index.html" style="color:white; text-decoration:none;">← Rudi Website</a>
   </div>
 
   <div class="container">
-
-    <!-- KADHI 1: ONGEZA BIDHAA -->
     <div class="card">
       <h2>Ongeza Bidhaa Mpya</h2>
-      <input id="jina" placeholder="Jina la Bidhaa mf: Lipstick">
+      <input id="jina" placeholder="Jina la Bidhaa mf: Lipstick Matte">
       <input id="bei" placeholder="Bei Tsh mf: 15000" type="number">
       <input id="picha" placeholder="Weka Link ya Picha">
       <button onclick="hifadhiBidhaa()" class="btn">+ Hifadhi Bidhaa</button>
-
       <h2 style="margin-top: 30px;">Bidhaa Zilizopo</h2>
       <div id="bidhaaList"><p>Inapakia...</p></div>
     </div>
 
-    <!-- KADHI 2: CHAT NA WATEJA -->
     <div class="card">
       <h2>💬 Sanduku la Mazungumzo</h2>
       <div id="adminChat" class="chat-box"></div>
-      <div class="chat-send">
-        <input id="adminInput" placeholder="Jibu mteja hapa...">
-        <button onclick="jibuMteja()">Tuma</button>
+      <div style="display:flex; margin-top:10px;">
+        <input id="adminInput" placeholder="Jibu mteja hapa..." style="flex:1;">
+        <button onclick="jibuMteja()" style="background:var(--pink); color:white; border:none; padding:12px 20px; border-radius: 8px; cursor:pointer;">Tuma</button>
       </div>
     </div>
-
   </div>
 
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
 <script>
-// 1. FIREBASE CONFIG - WEKA ILE ILE YA KWAKO
 const firebaseConfig = {
   apiKey: "AIzaSyDbYznd_wEyJPr_r1mnvUEy651QPhhk4TI",
   authDomain: "teknova-3688d.firebaseapp.com",
@@ -108,27 +60,33 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
-// 2. KUONGEZA NA KUFUTA BIDHAA
+// KUONGEZA BIDHAA NA KUJI-SAVE DATABASE
 function hifadhiBidhaa(){
   let jina = document.getElementById('jina').value;
   let bei = document.getElementById('bei').value;
   let picha = document.getElementById('picha').value;
-  if(jina == "" || bei == "" || picha == "") return alert("Jaza kila kitu!");
+  if(jina == "" || bei == "" || picha == "") return alert("⚠️ Jaza kila kitu!");
 
-  db.ref('bidhaa').push({ jina, bei, picha });
-  alert("Bidhaa Imehifadhiwa!");
-  document.getElementById('jina').value = "";
-  document.getElementById('bei').value = "";
-  document.getElementById('picha').value = "";
+  db.ref('bidhaa').push({
+    jina: jina,
+    bei: bei,
+    picha: picha,
+    time: Date.now() // tunaweka time ili zipangike mpya juu
+  }).then(()=>{
+    alert("✅ Bidhaa Imehifadhiwa na Imeonekana kwa Wateja!");
+    document.getElementById('jina').value = "";
+    document.getElementById('bei').value = "";
+    document.getElementById('picha').value = "";
+  });
 }
 
-// Onyesha bidhaa zilizopo na kutoa delete
+// ONYESHA BIDHAA ZILIZOPO NA KUTOA DELETE
 db.ref('bidhaa').on('value', (snapshot)=>{
   const data = snapshot.val();
   const list = document.getElementById('bidhaaList');
   list.innerHTML = "";
   if(data){
-    Object.keys(data).forEach(key=>{
+    Object.keys(data).reverse().forEach(key=>{ // reverse ili mpya ziwe juu
       let b = data[key];
       list.innerHTML += `
         <div class="bidhaa-item">
@@ -137,6 +95,8 @@ db.ref('bidhaa').on('value', (snapshot)=>{
         </div>
       `;
     })
+  } else {
+    list.innerHTML = "<p>Bado hakuna bidhaa</p>"
   }
 })
 
@@ -146,18 +106,21 @@ function futaBidhaa(id){
   }
 }
 
-// 3. MFUMO WA CHAT KWA ADMIN
+// MFUMO WA CHAT KWA ADMIN
 function jibuMteja(){
   let msg = document.getElementById('adminInput').value;
   if(msg == "") return;
   db.ref('chat').push({ ujumbe: msg, mtumaji: "Admin", time: Date.now() });
   document.getElementById('adminInput').value = "";
 }
-
 db.ref('chat').on('child_added', (snapshot)=>{
   let data = snapshot.val();
   let div = document.createElement('div');
-  div.className = 'msg ' + (data.mtumaji == "Admin"? 'msg-me' : 'msg-mteja');
+  div.style.margin = "8px 0"; div.style.padding = "10px"; div.style.borderRadius = "10px";
+  div.style.background = data.mtumaji == "Admin"? '#D81B60' : '#E0E0E0';
+  div.style.color = data.mtumaji == "Admin"? 'white' : 'black';
+  div.style.marginLeft = data.mtumaji == "Admin"? 'auto' : '0';
+  div.style.maxWidth = '80%';
   div.innerHTML = `<b>${data.mtumaji}:</b> ${data.ujumbe}`;
   document.getElementById('adminChat').appendChild(div);
   document.getElementById('adminChat').scrollTop = document.getElementById('adminChat').scrollHeight;
