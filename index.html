@@ -2,7 +2,6 @@
 <html lang="sw">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LULU BEAUTY - Vipodozi Bora Dar</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -28,8 +27,6 @@
     </div>
   </div>
 
-  <footer><p>© 2026 LULU BEAUTY. All Rights Reserved.</p></footer>
-
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
 <script>
@@ -37,39 +34,41 @@ const firebaseConfig = {
   apiKey: "AIzaSyDbYznd_wEyJPr_r1mnvUEy651QPhhk4TI",
   authDomain: "teknova-3688d.firebaseapp.com",
   databaseURL: "https://teknova-3688d-default-rtdb.firebaseio.com",
-  projectId: "teknova-43688d",
+  projectId: "teknova-3688d",
   storageBucket: "teknova-3688d.firebasestorage.app",
   messagingSenderId: "1030215294939",
   appId: "1:1030215294939:web:4d82493402600f4285d1fe"
 };
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
-const nambaYaDuka = "255712345678";
+const nambaYaDuka = "255712345678"; // WEKA NAMBA YA LULU
 
-function somaBidhaa(){
-  db.ref('bidhaa').on('value', (snapshot)=>{
-    const data = snapshot.val();
-    const grid = document.getElementById('bidhaaGrid');
-    grid.innerHTML = "";
-    if(data){
-      Object.keys(data).forEach(key=>{
-        let b = data[key];
-        grid.innerHTML += `
-        <div class="card">
-          <img src="${b.picha}">
-          <div class="card-body">
-            <h3>${b.jina}</h3>
-            <p class="bei">Tsh ${Number(b.bei).toLocaleString()}</p>
-            <a href="https://wa.me/${nambaYaDuka}?text=Nataka ${b.jina}" target="_blank">
-              <button class="btn-whatsapp">Oda WhatsApp</button>
-            </a>
-          </div>
-        </div>`;
-      })
-    }else{ grid.innerHTML = "<p style='text-align:center;'>Bado hakuna bidhaa. Admin anaongeza.</p>" }
-  })
-}
+// HII NDO INAYOFANYA IONEKANE MOJA KWA MOJA
+db.ref('bidhaa').on('value', (snapshot)=>{
+  const data = snapshot.val();
+  const grid = document.getElementById('bidhaaGrid');
+  grid.innerHTML = "";
+  if(data){
+    Object.keys(data).reverse().forEach(key=>{ // reverse ili mpya ziwe juu
+      let b = data[key];
+      grid.innerHTML += `
+      <div class="card">
+        <img src="${b.picha}" onerror="this.src='https://via.placeholder.com/280x280?text=LULU+BEAUTY'">
+        <div class="card-body">
+          <h3>${b.jina}</h3>
+          <p class="bei">Tsh ${Number(b.bei).toLocaleString()}</p>
+          <a href="https://wa.me/${nambaYaDuka}?text=Habari LULU BEAUTY, nataka kuoda ${b.jina} kwa Tsh ${b.bei}" target="_blank">
+            <button class="btn-whatsapp">Oda WhatsApp</button>
+          </a>
+        </div>
+      </div>`;
+    })
+  } else {
+    grid.innerHTML = "<p style='text-align:center;'>Bado hakuna bidhaa. Admin anaongeza.</p>"
+  }
+})
 
+// CHAT
 document.getElementById('chatBtn').onclick = () => document.getElementById('chatBox').classList.toggle('hidden');
 function tumaUjumbe(){
   let msg = document.getElementById('chatInput').value;
@@ -85,7 +84,6 @@ db.ref('chat').on('child_added', (snapshot)=>{
   document.getElementById('chatMessages').appendChild(div);
   document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
 })
-somaBidhaa();
 </script>
 </body>
 </html>
