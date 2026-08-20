@@ -27,8 +27,16 @@
   </div>
 </section>
 
-<main id="bidhaa" class="container">
-  <h2 class="title">Bidhaa Zetu Maarufu</h2>
+<main class="container">
+  <!-- BANNER YA KUNUNUA -->
+  <div class="promo-banner">
+    <span class="badge"><span>⚡</span> WAPYA WALIOWASILI</span>
+    <h2>Nunua katika Lulu Beauty</h2>
+    <p>Gundua maelfu ya bidhaa – ubora uliohakikishwa, uwasilishaji wa haraka hadi mlangoni pako.</p>
+    <button onclick="checkLoginBanner()" class="btn-nunua">Nunua Sasa →</button>
+  </div>
+
+  <h2 id="bidhaa" class="title">Bidhaa Zetu Maarufu</h2>
   <p class="subtitle">Chagua unachopenda na wasiliana nasi WhatsApp</p>
 
   <div class="search-box">
@@ -46,14 +54,28 @@
   <p>© 2026 LULU BEAUTY. Vipodozi Bora Mbeya. | WhatsApp: 0724 331 379</p>
 </footer>
 
-<!-- POPUP YA LOGIN - ITAKUJA HAPA -->
+<!-- POPUP YA LOGIN IMEFIXIWA -->
 <div id="loginPopup" class="popup-overlay">
   <div class="popup-box">
     <span class="close-btn" onclick="closePopup()">&times;</span>
-    <h3>Ingia Kwanza</h3>
-    <p>Unahitaji kuingia ili kuweza kuoda bidhaa</p>
-    <button class="btn-auth btn-google" onclick="loginWithGoogle()">Ingia na Google</button>
-    <button class="btn-auth" onclick="loginWithEmail()">Ingia na Email</button>
+    <h3>LOGIN</h3>
+
+    <div class="input-group">
+      <input type="email" id="loginEmail" placeholder="Email or username" required>
+    </div>
+    <div class="input-group">
+      <input type="password" id="loginPassword" placeholder="Password" required>
+    </div>
+    <button class="btn-login-main" onclick="loginWithEmailNew()">Ingia</button>
+
+    <div class="divider">OR</div>
+
+    <div class="social-login">
+      <!-- HAPA NDIO NIMEFIX LINK YA GOOGLE -->
+      <button class="btn-social btn-google" onclick="loginWithGoogle()">
+        <img src="https://www.google.com/favicon.ico" alt="Google">
+      </button>
+    </div>
   </div>
 </div>
 
