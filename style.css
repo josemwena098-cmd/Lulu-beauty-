@@ -6,91 +6,81 @@
 *{margin:0;padding:0;box-sizing:border-box; font-family:'Poppins',sans-serif; scroll-behavior:smooth;}
 body{background:var(--bg); color:#333;}
 
-/* NAV */
+/* NAV - IMEBUNGWA */
 header{background:var(--pink); box-shadow:0 4px 15px rgba(233,30,99,0.3); position:sticky; top:0; z-index:100;}
-nav{display:flex; justify-content:space-between; align-items:center; padding:20px 5%; max-width:1300px; margin:auto;}
-.logo{color:var(--gold); font-family: 'Great Vibes', cursive; font-weight:400; font-size:38px; letter-spacing:1px; text-shadow: 0 2px 5px rgba(0,0,0,0.2);}
-nav ul{list-style:none; display:flex; gap:30px;}
-nav a{text-decoration:none; color:var(--white); font-weight:600; font-size:16px; transition:0.3s;}
+nav{display:flex; justify-content:space-between; align-items:center; padding:15px 5%; max-width:1300px; margin:auto;}
+.logo{color:var(--gold); font-family: 'Great Vibes', cursive; font-weight:400; font-size:32px; letter-spacing:1px; text-shadow: 0 2px 5px rgba(0,0,0,0.2);} /* ILIKUWA 38px */
+nav ul{list-style:none; display:flex; gap:25px;}
+nav a{text-decoration:none; color:var(--white); font-weight:600; font-size:15px; transition:0.3s;}
 nav a:hover{color:var(--gold);}
 
-/* HERO */
-.hero{background: linear-gradient(rgba(233,30,99,0.65), rgba(194,24,91,0.75)), url('https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?q=80&w=1600'); background-size: cover; background-position: center; background-attachment: fixed; color:var(--white); text-align:center; padding:160px 20px;}
-.hero-title{font-family: 'Montserrat', sans-serif; font-weight:800; font-size:56px; text-transform:uppercase; letter-spacing:3px;}
-.hero-text p{font-size:18px; margin:20px 0 30px; max-width:600px; margin-left:auto; margin-right:auto;}
-.btn-hero{background:var(--gold); color:var(--magenta); padding:16px 40px; border-radius:50px; text-decoration:none; font-weight:800; font-size:17px; transition:0.3s; box-shadow:0 5px 15px rgba(255,215,0,0.4);}
+/* HERO - IMEBUNGWA */
+.hero{background: linear-gradient(rgba(233,30,99,0.65), rgba(194,24,91,0.75)), url('https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?q=80&w=1600'); background-size: cover; background-position: center; background-attachment: fixed; color:var(--white); text-align:center; padding:120px 20px;} /* ILIKUWA 160px */
+.hero-title{font-family: 'Montserrat', sans-serif; font-weight:800; font-size:38px; text-transform:uppercase; letter-spacing:2px;} /* ILIKUWA 56px */
+.hero-text p{font-size:16px; margin:15px 0 25px; max-width:600px; margin-left:auto; margin-right:auto;} /* ILIKUWA 18px */
+.btn-hero{background:var(--gold); color:var(--magenta); padding:14px 35px; border-radius:50px; text-decoration:none; font-weight:800; font-size:16px; transition:0.3s; box-shadow:0 5px 15px rgba(255,215,0,0.4);} /* ILIKUWA 16px 40px */
 .btn-hero:hover{background:#FFC400; transform:scale(1.08);}
 
-/* BANNER YA PROMO */
-.promo-banner{background: linear-gradient(135deg, var(--pink), var(--magenta)); color: var(--white); padding: 40px; border-radius: 20px; margin-bottom: 60px; text-align: left; box-shadow: 0 10px 30px rgba(233,30,99,0.3);}
-.promo-banner.badge{background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 50px; font-size: 13px; font-weight: 700; display: inline-flex; align-items: center; gap: 5px; margin-bottom: 15px;}
-.promo-banner h2{font-family: 'Montserrat', sans-serif; font-size: 32px; font-weight: 800; margin-bottom: 10px;}
-.promo-banner p{font-size: 16px; margin-bottom: 25px; max-width: 500px; opacity: 0.9;}
-.btn-nunua{background: var(--white); color: var(--magenta); border: none; padding: 14px 30px; border-radius: 12px; font-weight: 800; font-size: 16px; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px;}
+/* BANNER YA PROMO - IMEBUNGWA */
+.promo-banner{background: linear-gradient(135deg, var(--pink), var(--magenta)); color: var(--white); padding: 30px; border-radius: 20px; margin-bottom: 50px; text-align: left; box-shadow: 0 10px 30px rgba(233,30,99,0.3);} /* ILIKUWA 40px */
+.promo-banner .badge{background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 50px; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 5px; margin-bottom: 12px;}
+.promo-banner h2{font-family: 'Montserrat', sans-serif; font-size:26px; font-weight: 800; margin-bottom: 10px;} /* ILIKUWA 32px */
+.promo-banner p{font-size: 15px; margin-bottom: 20px; max-width: 500px; opacity: 0.9;} /* ILIKUWA 16px */
+.btn-nunua{background: var(--white); color: var(--magenta); border: none; padding: 12px 25px; border-radius: 12px; font-weight: 800; font-size: 15px; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px;} /* ILIKUWA 14px 30px */
 .btn-nunua:hover{background: var(--gold); transform: translateX(5px);}
 
 /* SEARCH */
-.search-box{max-width:600px; margin:0 auto 50px auto;}
-#searchInput{width:100%; padding:18px 25px; border-radius:50px; border:2px solid var(--rose); font-size:16px; outline:none; transition:0.3s;}
+.search-box{max-width:600px; margin:0 auto 40px auto;}
+#searchInput{width:100%; padding:16px 22px; border-radius:50px; border:2px solid var(--rose); font-size:15px; outline:none; transition:0.3s;}
 #searchInput:focus{border-color:var(--pink); box-shadow:0 0 10px rgba(233,30,99,0.2);}
 
-/* BIDHAA */
-.container{padding:80px 5%; max-width:1300px; margin:auto;}
-.title{text-align:center; color:var(--magenta); font-family: 'Montserrat', sans-serif; font-size:40px; font-weight:800; text-transform:uppercase;}
-.subtitle{text-align:center; color:#888; margin-bottom:30px; font-size:16px;}
-.grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:30px;}
-.card{background:var(--white); border-radius:20px; box-shadow:0 8px 25px rgba(233,30,99,0.1); overflow:hidden; transition:0.4s; border:2px solid var(--rose);}
+/* BIDHAA - IMEBUNGWA */
+.container{padding:60px 5%; max-width:1300px; margin:auto;} /* ILIKUWA 80px */
+.title{text-align:center; color:var(--magenta); font-family: 'Montserrat', sans-serif; font-size:32px; font-weight:800; text-transform:uppercase;} /* ILIKUWA 40px */
+.subtitle{text-align:center; color:#888; margin-bottom:25px; font-size:15px;} /* ILIKUWA 16px */
+.grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:25px;} /* ILIKUWA 320px na 30px */
+.card{background:var(--white); border-radius:18px; box-shadow:0 8px 25px rgba(233,30,99,0.1); overflow:hidden; transition:0.4s; border:2px solid var(--rose);}
 .card:hover{transform:translateY(-10px); border-color:var(--pink);}
-.card img{width:100%; height:350px; object-fit:cover;}
-.card-body{padding:25px; text-align:center;}
-.card-body h3{font-size:20px; font-weight:700; color:var(--magenta);}
-.bei{color:var(--pink); font-size:28px; font-weight:800; margin:15px 0;}
-.btn-whatsapp{display:inline-block; width:100%; padding:14px; border-radius:10px; background:var(--pink); color:var(--white); font-weight:700; font-size:16px; text-decoration:none; border:none; cursor:pointer; transition:0.3s;}
+.card img{width:100%; height:320px; object-fit:cover;} /* ILIKUWA 350px */
+.card-body{padding:20px; text-align:center;} /* ILIKUWA 25px */
+.card-body h3{font-size:18px; font-weight:700; color:var(--magenta);} /* ILIKUWA 20px */
+.bei{color:var(--pink); font-size:24px; font-weight:800; margin:12px 0;} /* ILIKUWA 28px */
+.btn-whatsapp{display:inline-block; width:100%; padding:12px; border-radius:10px; background:var(--pink); color:var(--white); font-weight:700; font-size:15px; text-decoration:none; border:none; cursor:pointer; transition:0.3s;} /* ILIKUWA 14px 16px */
 .btn-whatsapp:hover{background:var(--magenta);}
 
 /* WHATSAPP FLOAT */
-.whatsapp-float{position:fixed; width:60px; height:60px; bottom:30px; right:30px; background-color:var(--green); color:#FFF; border-radius:50px; text-align:center; font-size:30px; box-shadow: 2px 2px 3px #999; z-index:100; display:flex; align-items:center; justify-content:center; transition:0.3s;}
+.whatsapp-float{position:fixed; width:55px; height:55px; bottom:25px; right:25px; background-color:var(--green); color:#FFF; border-radius:50px; text-align:center; font-size:30px; box-shadow: 2px 2px 3px #999; z-index:100; display:flex; align-items:center; justify-content:center; transition:0.3s;}
 .whatsapp-float:hover{transform:scale(1.1);}
-.whatsapp-float img{width:35px;}
+.whatsapp-float img{width:32px;}
 
-/* POPUP MPYA YA GLASSMORPHISM */
+/* POPUP YA GLASSMORPHISM */
 .popup-overlay{display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); backdrop-filter: blur(8px); z-index:999; align-items:center; justify-content:center;}
-.popup-box{
-  background: rgba(255, 255, 255, 0.15); /* KIOO */
-  backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding:40px; border-radius:25px; text-align:left; width:90%; max-width:400px; position:relative;
-  box-shadow:0 10px 30px rgba(0,0,0,0.2); color: var(--white);
-}
-.popup-box h3{font-family: 'Montserrat', sans-serif; font-size:28px; font-weight:800; margin-bottom:25px; color: var(--white);}
-.close-btn{position:absolute; top:15px; right:20px; font-size:30px; color:var(--white); cursor:pointer; opacity:0.7;}
+.popup-box{background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.2); padding:30px; border-radius:25px; text-align:left; width:90%; max-width:380px; position:relative; box-shadow:0 10px 30px rgba(0,0,0,0.2); color: var(--white);} /* ILIKUWA 40px na 400px */
+.popup-box h3{font-family: 'Montserrat', sans-serif; font-size:24px; font-weight:800; margin-bottom:20px; color: var(--white);} /* ILIKUWA 28px */
+.close-btn{position:absolute; top:15px; right:20px; font-size:28px; color:var(--white); cursor:pointer; opacity:0.7;}
 .close-btn:hover{opacity:1;}
-.input-group{margin-bottom:15px;}
-.input-group input{
-  width:100%; padding:14px 18px; border-radius:12px; border:1px solid rgba(255,255,255,0.3);
-  background: rgba(255,255,255,0.1); color: var(--white); font-size:16px; outline:none;
-}
+.input-group{margin-bottom:14px;}
+.input-group input{width:100%; padding:13px 16px; border-radius:12px; border:1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.1); color: var(--white); font-size:15px; outline:none;}
 .input-group input::placeholder{color: rgba(255,255,255,0.7);}
-.btn-login-main{width:100%; background:var(--white); color:var(--magenta); border:none; padding:14px; border-radius:12px; font-weight:800; font-size:16px; cursor:pointer; margin-top:10px; transition:0.3s;}
+.btn-login-main{width:100%; background:var(--white); color:var(--magenta); border:none; padding:13px; border-radius:12px; font-weight:800; font-size:15px; cursor:pointer; margin-top:10px; transition:0.3s;}
 .btn-login-main:hover{background:var(--gold);}
-.divider{text-align:center; margin:20px 0; color: rgba(255,255,255,0.7); font-weight:600;}
+.divider{text-align:center; margin:18px 0; color: rgba(255,255,255,0.7); font-weight:600;}
 .social-login{display:flex; justify-content:center;}
-.btn-social{
-  width:50px; height:50px; border-radius:50%; border:none; cursor:pointer;
-  display:flex; align-items:center; justify-content:center; transition:0.3s;
-}
-.btn-social img{width:24px; height:24px;}
+.btn-social{width:45px; height:45px; border-radius:50%; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:0.3s;}
+.btn-social img{width:22px; height:22px;}
 .btn-google{background:var(--white);}
 .btn-google:hover{transform:scale(1.1);}
 
 /* FOOTER */
-footer{text-align:center; padding:30px; background:var(--magenta); color:var(--white); font-weight:600;}
+footer{text-align:center; padding:25px; background:var(--magenta); color:var(--white); font-weight:600; font-size:14px;}
 
 /* MOBILE */
 @media(max-width:768px){
   nav ul{display:none;}
- .logo{font-size:32px;}
- .hero{background-attachment: scroll;}
- .promo-banner{padding: 25px;}
- .promo-banner h2{font-size: 24px;}
+  .logo{font-size:28px;} /* ILIKUWA 32px */
+  .hero{background-attachment: scroll; padding:100px 20px;}
+  .hero-title{font-size:30px; letter-spacing:1px;} /* ILIKUWA 38px */
+  .promo-banner{padding: 20px;}
+  .promo-banner h2{font-size: 22px;} /* ILIKUWA 24px */
+  .title{font-size:26px;} /* ILIKUWA 40px */
 }
