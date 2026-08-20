@@ -21,6 +21,14 @@ nav a:hover{color:var(--gold);}
 .btn-hero{background:var(--gold); color:var(--magenta); padding:16px 40px; border-radius:50px; text-decoration:none; font-weight:800; font-size:17px; transition:0.3s; box-shadow:0 5px 15px rgba(255,215,0,0.4);}
 .btn-hero:hover{background:#FFC400; transform:scale(1.08);}
 
+/* BANNER YA PROMO */
+.promo-banner{background: linear-gradient(135deg, var(--pink), var(--magenta)); color: var(--white); padding: 40px; border-radius: 20px; margin-bottom: 60px; text-align: left; box-shadow: 0 10px 30px rgba(233,30,99,0.3);}
+.promo-banner.badge{background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 50px; font-size: 13px; font-weight: 700; display: inline-flex; align-items: center; gap: 5px; margin-bottom: 15px;}
+.promo-banner h2{font-family: 'Montserrat', sans-serif; font-size: 32px; font-weight: 800; margin-bottom: 10px;}
+.promo-banner p{font-size: 16px; margin-bottom: 25px; max-width: 500px; opacity: 0.9;}
+.btn-nunua{background: var(--white); color: var(--magenta); border: none; padding: 14px 30px; border-radius: 12px; font-weight: 800; font-size: 16px; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px;}
+.btn-nunua:hover{background: var(--gold); transform: translateX(5px);}
+
 /* SEARCH */
 .search-box{max-width:600px; margin:0 auto 50px auto;}
 #searchInput{width:100%; padding:18px 25px; border-radius:50px; border:2px solid var(--rose); font-size:16px; outline:none; transition:0.3s;}
@@ -45,16 +53,35 @@ nav a:hover{color:var(--gold);}
 .whatsapp-float:hover{transform:scale(1.1);}
 .whatsapp-float img{width:35px;}
 
-/* POPUP YA LOGIN - MPYA */
-.popup-overlay{display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:999; align-items:center; justify-content:center;}
-.popup-box{background:var(--white); padding:40px; border-radius:20px; text-align:center; max-width:400px; position:relative; box-shadow:0 10px 30px rgba(0,0,0,0.2);}
-.popup-box h3{color:var(--magenta); font-size:24px; margin-bottom:10px;}
-.popup-box p{color:#666; margin-bottom:20px;}
-.close-btn{position:absolute; top:10px; right:20px; font-size:30px; color:#999; cursor:pointer;}
-.btn-auth{width:100%; background:var(--pink); color:var(--white); border:none; padding:14px; border-radius:10px; font-weight:700; cursor:pointer; margin-bottom:10px; transition:0.3s;}
-.btn-auth:hover{background:var(--magenta);}
-.btn-google{background:#DB4437;}
-.btn-google:hover{background:#C23321;}
+/* POPUP MPYA YA GLASSMORPHISM */
+.popup-overlay{display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); backdrop-filter: blur(8px); z-index:999; align-items:center; justify-content:center;}
+.popup-box{
+  background: rgba(255, 255, 255, 0.15); /* KIOO */
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding:40px; border-radius:25px; text-align:left; width:90%; max-width:400px; position:relative;
+  box-shadow:0 10px 30px rgba(0,0,0,0.2); color: var(--white);
+}
+.popup-box h3{font-family: 'Montserrat', sans-serif; font-size:28px; font-weight:800; margin-bottom:25px; color: var(--white);}
+.close-btn{position:absolute; top:15px; right:20px; font-size:30px; color:var(--white); cursor:pointer; opacity:0.7;}
+.close-btn:hover{opacity:1;}
+.input-group{margin-bottom:15px;}
+.input-group input{
+  width:100%; padding:14px 18px; border-radius:12px; border:1px solid rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.1); color: var(--white); font-size:16px; outline:none;
+}
+.input-group input::placeholder{color: rgba(255,255,255,0.7);}
+.btn-login-main{width:100%; background:var(--white); color:var(--magenta); border:none; padding:14px; border-radius:12px; font-weight:800; font-size:16px; cursor:pointer; margin-top:10px; transition:0.3s;}
+.btn-login-main:hover{background:var(--gold);}
+.divider{text-align:center; margin:20px 0; color: rgba(255,255,255,0.7); font-weight:600;}
+.social-login{display:flex; justify-content:center;}
+.btn-social{
+  width:50px; height:50px; border-radius:50%; border:none; cursor:pointer;
+  display:flex; align-items:center; justify-content:center; transition:0.3s;
+}
+.btn-social img{width:24px; height:24px;}
+.btn-google{background:var(--white);}
+.btn-google:hover{transform:scale(1.1);}
 
 /* FOOTER */
 footer{text-align:center; padding:30px; background:var(--magenta); color:var(--white); font-weight:600;}
@@ -62,7 +89,8 @@ footer{text-align:center; padding:30px; background:var(--magenta); color:var(--w
 /* MOBILE */
 @media(max-width:768px){
   nav ul{display:none;}
- .hero-title{font-size:38px; letter-spacing:1px;}
  .logo{font-size:32px;}
  .hero{background-attachment: scroll;}
+ .promo-banner{padding: 25px;}
+ .promo-banner h2{font-size: 24px;}
 }
