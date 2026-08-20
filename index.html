@@ -1,89 +1,66 @@
 <!DOCTYPE html>
 <html lang="sw">
 <head>
-  <meta charset="UTF-8">
-  <title>LULU BEAUTY - Vipodozi Bora Dar</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LULU BEAUTY - Vipodozi Bora Mbeya</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="hero">
-    <h1>LULU BEAUTY</h1>
-    <p>Vipodozi vya Kipekee | Mbeya 🇹🇿</p>
-  </header>
 
-  <main class="container">
-    <h2 class="title">Bidhaa Zetu</h2>
-    <p class="subtitle">Chagua urembo wako kutoka kwetu</p>
-    <div id="bidhaaGrid" class="grid"><p style="text-align:center;">Inapakia bidhaa...</p></div>
-  </main>
+<header>
+  <nav>
+    <h2 class="logo">LULU BEAUTY</h2>
+    <ul>
+      <li><a href="#">Nyumbani</a></li>
+      <li><a href="#bidhaa">Bidhaa</a></li>
+      <li><a href="https://wa.me/255724331379" target="_blank">Wasiliana</a></li>
+    </ul>
+  </nav>
+</header>
 
-  <button id="chatBtn" class="chat-float">💬 Chat Nasi</button>
-  <div id="chatBox" class="chat-popup hidden">
-    <div class="chat-header">Ongea na Msaada wa LULU</div>
-    <div id="chatMessages" class="chat-messages"></div>
-    <div class="chat-input">
-      <input id="chatInput" placeholder="Andika swali lako...">
-      <button onclick="tumaUjumbe()">Tuma</button>
-    </div>
+<section class="hero">
+  <div class="hero-text">
+    <h1 class="hero-title">Vipodozi vya Kipekee</h1>
+    <p>Boresha uzuri wako na LULU BEAUTY. Bidhaa halisi kutoka Mbeya 🇹🇿</p>
+    <a href="#bidhaa" class="btn-hero">Tazama Bidhaa</a>
+  </div>
+</section>
+
+<main id="bidhaa" class="container">
+  <h2 class="title">Bidhaa Zetu Maarufu</h2>
+  <p class="subtitle">Chagua unachopenda na wasiliana nasi WhatsApp</p>
+
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Tafuta bidhaa... mfano: Lipstick">
   </div>
 
+  <div id="bidhaaGrid" class="grid"><p style="text-align:center;">Inapakia bidhaa kutoka database...</p></div>
+</main>
+
+<a href="https://wa.me/255724331379" target="_blank" class="whatsapp-float">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+</a>
+
+<footer>
+  <p>© 2026 LULU BEAUTY. Vipodozi Bora Mbeya. | WhatsApp: 0724 331 379</p>
+</footer>
+
+<!-- POPUP YA LOGIN - ITAKUJA HAPA -->
+<div id="loginPopup" class="popup-overlay">
+  <div class="popup-box">
+    <span class="close-btn" onclick="closePopup()">&times;</span>
+    <h3>Ingia Kwanza</h3>
+    <p>Unahitaji kuingia ili kuweza kuoda bidhaa</p>
+    <button class="btn-auth btn-google" onclick="loginWithGoogle()">Ingia na Google</button>
+    <button class="btn-auth" onclick="loginWithEmail()">Ingia na Email</button>
+  </div>
+</div>
+
+<!-- SCRIPT ZA FIREBASE -->
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
-<script>
-const firebaseConfig = {
-  apiKey: "AIzaSyDbYznd_wEyJPr_r1mnvUEy651QPhhk4TI",
-  authDomain: "teknova-3688d.firebaseapp.com",
-  databaseURL: "https://teknova-3688d-default-rtdb.firebaseio.com",
-  projectId: "teknova-3688d",
-  storageBucket: "teknova-3688d.firebasestorage.app",
-  messagingSenderId: "1030215294939",
-  appId: "1:1030215294939:web:4d82493402600f4285d1fe"
-};
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
-const nambaYaDuka = "255712345678"; // WEKA NAMBA YA LULU
-
-// HII NDO INAYOFANYA IONEKANE MOJA KWA MOJA
-db.ref('bidhaa').on('value', (snapshot)=>{
-  const data = snapshot.val();
-  const grid = document.getElementById('bidhaaGrid');
-  grid.innerHTML = "";
-  if(data){
-    Object.keys(data).reverse().forEach(key=>{ // reverse ili mpya ziwe juu
-      let b = data[key];
-      grid.innerHTML += `
-      <div class="card">
-        <img src="${b.picha}" onerror="this.src='https://via.placeholder.com/280x280?text=LULU+BEAUTY'">
-        <div class="card-body">
-          <h3>${b.jina}</h3>
-          <p class="bei">Tsh ${Number(b.bei).toLocaleString()}</p>
-          <a href="https://wa.me/${nambaYaDuka}?text=Habari LULU BEAUTY, nataka kuoda ${b.jina} kwa Tsh ${b.bei}" target="_blank">
-            <button class="btn-whatsapp">Oda WhatsApp</button>
-          </a>
-        </div>
-      </div>`;
-    })
-  } else {
-    grid.innerHTML = "<p style='text-align:center;'>Bado hakuna bidhaa. Admin anaongeza.</p>"
-  }
-})
-
-// CHAT
-document.getElementById('chatBtn').onclick = () => document.getElementById('chatBox').classList.toggle('hidden');
-function tumaUjumbe(){
-  let msg = document.getElementById('chatInput').value;
-  if(msg == "") return;
-  db.ref('chat').push({ ujumbe: msg, mtumaji: "Mteja", time: Date.now() });
-  document.getElementById('chatInput').value = "";
-}
-db.ref('chat').on('child_added', (snapshot)=>{
-  let data = snapshot.val();
-  let div = document.createElement('div');
-  div.className = 'msg ' + (data.mtumaji == "Mteja"? 'msg-me' : 'msg-admin');
-  div.innerText = data.ujumbe;
-  document.getElementById('chatMessages').appendChild(div);
-  document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
-})
-</script>
+<script src="script.js"></script>
 </body>
 </html>
