@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LULU ADMIN</title>
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<!-- LOGIN PAGE -->
+<div id="loginPage" class="login-bg">
+  <div class="login-box scale-in">
+    <h2>💎 LULU ADMIN LOGIN</h2>
+    <div class="input-group"><label>Email</label><input type="email" id="adminEmail" placeholder="admin@gmail.com"></div>
+    <div class="input-group"><label>Password</label><input type="password" id="adminPass" placeholder="******"></div>
+    <button class="btn-neon" onclick="adminLogin()">Ingia</button>
+    <p id="loginError" style="color:red; margin-top:10px;"></p>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="adminPanel" style="display:none;">
+<button class="menu-toggle" onclick="toggleMenu()">☰</button>
+<div class="container">
+  <div class="sidebar" id="sidebar">
+    <div class="logo">💎 <span>LULU ADMIN</span></div>
+    <div class="nav-item active" onclick="showPage('dashboard', this)">📊 Dashboard</div>
+    <div class="nav-item" onclick="showPage('bidhaa', this)">📦 Bidhaa</div>
+    <div class="nav-item" onclick="showPage('category', this)">🏷️ Category</div>
+    <div class="nav-item" onclick="showPage('delivery', this)">🚚 Delivery</div>
+    <div class="nav-item" onclick="showPage('payment', this)">💳 Payment</div>
+    <div class="nav-item" onclick="adminLogout()" style="color:var(--danger);">🚪 Logout</div>
+  </div>
+
+  <div class="main" id="main">
+    <div class="header"><h1 id="pageTitle">Dashboard</h1></div>
+
+    <div id="dashboard" class="page"><div class="grid"><div class="card glow"><h3>Total Products</h3><p id="totalProducts">0</p></div><div class="card glow"><h3>Total Categories</h3><p id="totalCategories">0</p></div></div></div>
+    <div id="bidhaa" class="page" style="display:none;"><button class="btn-neon" onclick="openModal('bidhaaModal')">+ Ongeza Bidhaa</button><div class="card"><table class="table"><thead><tr><th>PICHA</th><th>JINA</th><th>BEI</th><th>ACTION</th></tr></thead><tbody id="bidhaaTable"></tbody></table></div></div>
+    <div id="category" class="page" style="display:none;"><button class="btn-neon" onclick="openModal('catModal')">+ Add Category</button><div class="card"><table class="table"><thead><tr><th>PICHA</th><th>JINA</th><th>ACTION</th></tr></thead><tbody id="catTable"></tbody></table></div></div>
+    <div id="delivery" class="page" style="display:none;"><button class="btn-neon" onclick="openModal('delModal')">+ Add Delivery</button><div class="card"><table class="table"><thead><tr><th>METHOD</th><th>FEE</th><th>ACTION</th></tr></thead><tbody id="delTable"></tbody></table></div></div>
+    
+    <div id="payment" class="page" style="display:none;">
+      <div class="card"><div class="payment-header"><h3>🏦 Bank Transfer</h3> <span class="badge">Enabled</span></div><p class="sub">Buyer transfers money to your account</p><div class="grid-2"><div class="input-group"><label>Bank Name</label><input type="text" id="bankName" placeholder="e.g. CRDB Bank"></div><div class="input-group"><label>Account Name</label><input type="text" id="bankAccName" placeholder="As printed on cheque book"></div><div class="input-group"><label>Account Number</label><input type="text" id="bankAcc" placeholder="e.g. 01234567890"></div><div class="input-group"><label>Branch <span>(optional)</span></label><input type="text" id="bankBranch" placeholder="e.g. Kariakoo"></div></div></div>
+      <div class="card"><div class="payment-header"><h3>💳 Online Payments <span class="via">via Snippe</span></h3> <span class="badge">Enabled</span></div><p class="sub">Mobile Money, Card & QR Code - one API key</p><div class="alert">Get your API key from snippe.sh → Dashboard → API Keys.</div><div class="input-group"><label>API Key</label><input type="text" id="apiKey" placeholder="snp_..."></div><h4>Enable payment methods</h4><label class="checkbox"><input type="checkbox" id="mpesa" checked> <b>Mobile Money</b> <br><span>M-Pesa, Airtel Money, Tigo Pesa</span></label><label class="checkbox"><input type="checkbox" id="card" checked> <b>Card Payments</b> <br><span>Visa & Mastercard</span></label><label class="checkbox"><input type="checkbox" id="qr" checked> <b>QR Code</b> <br><span>TanQR dynamic QR</span></label><button class="btn-save" onclick="savePayments()">Save Payment Settings</button></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="bidhaaModal"><div class="modal"><h3>Ongeza Bidhaa</h3><div class="input-group"><label>Jina</label><input id="bidhaaJina"></div><div class="input-group"><label>Bei</label><input id="bidhaaBei" type="number"></div><div class="input-group"><label>Picha URL</label><input id="bidhaaPicha"></div><div><button class="btn-neon" onclick="addBidhaa()">Hifadhi</button><button class="btn-danger" onclick="closeModal('bidhaaModal')">Funga</button></div></div></div>
+<div class="modal-bg" id="catModal"><div class="modal"><h3>Ongeza Category</h3><div class="input-group"><label>Jina</label><input id="catName"></div><div class="input-group"><label>Picha URL</label><input id="catImage"></div><div><button class="btn-neon" onclick="saveCategory()">Hifadhi</button><button class="btn-danger" onclick="closeModal('catModal')">Funga</button></div></div></div>
+<div class="modal-bg" id="delModal"><div class="modal"><h3>Ongeza Delivery</h3><div class="input-group"><label>Jina</label><input id="delName"></div><div class="input-group"><label>Fee</label><input id="delFee" type="number"></div><div><button class="btn-neon" onclick="saveDelivery()">Hifadhi</button><button class="btn-danger" onclick="closeModal('delModal')">Funga</button></div></div></div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>
