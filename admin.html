@@ -3,54 +3,167 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LULU ADMIN LOGIN</title>
-<link rel="stylesheet" href="admin.css">
+<title>LULU ADMIN</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
+:root{ --bg:#F8F9FA; --card:#FFFFFF; --primary:#E91E63; --text:#212529; --border:#E0E0E0; --danger:#DC3545; --muted:#6C757D; --green:#10B981; --focus:#F8BBD0;}
+*{margin:0;padding:0;box-sizing:border-box; font-family:'Poppins', sans-serif;}
+body{background:var(--bg); color:var(--text);}
+
+/* LOGIN */
+.login-bg{width:100%; height:100vh; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg, #F8F9FA, #FCE4EC);}
+.login-box{background:var(--card); padding:40px; border-radius:20px; width:90%; max-width:420px; box-shadow:0 10px 40px rgba(233,30,99,0.15); border:1px solid var(--border);}
+.login-box h2{margin-bottom:30px; color:var(--primary); text-align:center; font-size:26px; font-weight:800;}
+.input-group{margin-bottom:20px;}
+.input-group label{font-size:14px; color:var(--muted); font-weight:600; margin-bottom:8px; display:block;}
+.input-group input,.input-group textarea{width:100%; padding:14px 16px; background:#fff; border:2px solid var(--border); border-radius:12px; font-size:15px; transition:0.3s; outline:none;}
+.input-group textarea{resize:vertical; min-height:80px;}
+.input-group input:focus,.input-group textarea:focus{border-color:var(--primary); box-shadow:0 0 0 4px var(--focus);}
+.input-group input::placeholder{color:#BDBDBD;}
+.btn-primary{background:linear-gradient(135deg, var(--primary), #D81B60); color:white; border:none; padding:16px; border-radius:12px; font-weight:700; cursor:pointer; width:100%; font-size:16px; box-shadow:0 4px 15px rgba(233,30,99,0.3); transition:0.3s;}
+.btn-primary:hover{transform:translateY(-2px); box-shadow:0 6px 20px rgba(233,30,99,0.4);}
+
+/* ADMIN PANEL */
+.container{padding:30px; max-width:1100px; margin:auto;}
+.header{display:flex; justify-content:space-between; align-items:center; margin-bottom:30px;}
+.header h1{font-size:30px; font-weight:800;}
+.card{background:var(--card); border:1px solid var(--border); border-radius:20px; padding:30px; margin-bottom:30px; box-shadow:0 4px 20px rgba(0,0,0,0.05);}
+.card-title{font-size:22px; font-weight:700; margin-bottom:25px; color:var(--text);}
+.grid-2{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+.grid-3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px;}
+
+/* FORM PREMIUM */
+.btn-green{background:linear-gradient(135deg, var(--green), #059669); color:white; border:none; padding:14px 24px; border-radius:12px; font-weight:700; cursor:pointer; box-shadow:0 4px 15px rgba(16,185,129,0.3);}
+.btn-danger{background:var(--danger); color:white; border:none; padding:8px 14px; border-radius:8px; cursor:pointer; font-weight:600;}
+.card-header{display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; padding-bottom:15px; border-bottom:1px solid var(--border);}
+.card-header h3{font-size:18px; font-weight:700;}
+.toggle{width:52px; height:28px; background:#E0E0E0; border-radius:50px; position:relative; cursor:pointer; transition:0.3s;}
+.toggle.active{background:var(--green);}
+.toggle::after{content:''; position:absolute; width:22px; height:22px; background:#fff; border-radius:50%; top:3px; left:3px; transition:0.3s; box-shadow:0 2px 5px rgba(0,0,0,0.2);}
+.toggle.active::after{left:27px;}
+.switch-label{font-size:13px; color:var(--green); font-weight:700;}
+.alert{background:#E8F5E9; border-left:4px solid var(--green); padding:14px; border-radius:10px; font-size:14px; margin:15px 0;}
+table{width:100%; border-collapse:collapse; margin-top:15px;}
+table th{color:var(--muted); font-weight:600; font-size:13px; text-transform:uppercase; padding:12px; text-align:left; border-bottom:2px solid var(--border);}
+table td{padding:14px; border-bottom:1px solid var(--border);}
+.badge-sale{background:#10B981; color:white; padding:4px 10px; border-radius:6px; font-size:12px; font-weight:700;}
+
+@media(max-width:768px){.grid-2,.grid-3{grid-template-columns:1fr;}.container{padding:20px;}}
+</style>
 </head>
 <body>
 
 <!-- LOGIN PAGE -->
 <div id="loginPage" class="login-bg">
-  <div class="login-box scale-in">
+  <div class="login-box">
     <h2>💎 LULU ADMIN LOGIN</h2>
     <div class="input-group"><label>Email</label><input type="email" id="adminEmail" placeholder="admin@gmail.com"></div>
     <div class="input-group"><label>Password</label><input type="password" id="adminPass" placeholder="******"></div>
-    <button class="btn-neon" onclick="adminLogin()">Ingia</button>
-    <p id="loginError" style="color:red; margin-top:10px;"></p>
+    <button class="btn-primary" onclick="adminLogin()">Ingia</button>
+    <p id="loginError" style="color:red; margin-top:10px; text-align:center;"></p>
   </div>
 </div>
 
 <!-- ADMIN PANEL -->
 <div id="adminPanel" style="display:none;">
-<button class="menu-toggle" onclick="toggleMenu()">☰</button>
 <div class="container">
-  <div class="sidebar" id="sidebar">
-    <div class="logo">💎 <span>LULU ADMIN</span></div>
-    <div class="nav-item active" onclick="showPage('dashboard', this)">📊 Dashboard</div>
-    <div class="nav-item" onclick="showPage('bidhaa', this)">📦 Bidhaa</div>
-    <div class="nav-item" onclick="showPage('category', this)">🏷️ Category</div>
-    <div class="nav-item" onclick="showPage('delivery', this)">🚚 Delivery</div>
-    <div class="nav-item" onclick="showPage('payment', this)">💳 Payment</div>
-    <div class="nav-item" onclick="adminLogout()" style="color:var(--danger);">🚪 Logout</div>
+  <div class="header">
+    <h1>ADMIN PANEL - LULU BEAUTY</h1>
+    <button class="btn-primary" style="width:auto; padding:12px 24px;" onclick="logoutAdmin()">Toka</button>
   </div>
 
-  <div class="main" id="main">
-    <div class="header"><h1 id="pageTitle">Dashboard</h1></div>
-    <div id="dashboard" class="page"><div class="grid"><div class="card glow"><h3>Total Products</h3><p id="totalProducts">0</p></div><div class="card glow"><h3>Total Categories</h3><p id="totalCategories">0</p></div></div></div>
-    <div id="bidhaa" class="page" style="display:none;"><button class="btn-neon" onclick="openModal('bidhaaModal')">+ Ongeza Bidhaa</button><div class="card"><table class="table"><thead><tr><th>PICHA</th><th>JINA</th><th>BEI</th><th>ACTION</th></tr></thead><tbody id="bidhaaTable"></tbody></table></div></div>
-    <div id="category" class="page" style="display:none;"><button class="btn-neon" onclick="openModal('catModal')">+ Add Category</button><div class="card"><table class="table"><thead><tr><th>PICHA</th><th>JINA</th><th>ACTION</th></tr></thead><tbody id="catTable"></tbody></table></div></div>
-    <div id="delivery" class="page" style="display:none;"><button class="btn-neon" onclick="openModal('delModal')">+ Add Delivery</button><div class="card"><table class="table"><thead><tr><th>METHOD</th><th>FEE</th><th>ACTION</th></tr></thead><tbody id="delTable"></tbody></table></div></div>
-    <div id="payment" class="page" style="display:none;"><div class="card"><div class="payment-header"><h3>🏦 Bank Transfer</h3> <span class="badge">Enabled</span></div><p class="sub">Buyer transfers money to your account</p><div class="grid-2"><div class="input-group"><label>Bank Name</label><input type="text" id="bankName"></div><div class="input-group"><label>Account Name</label><input type="text" id="bankAccName"></div><div class="input-group"><label>Account Number</label><input type="text" id="bankAcc"></div><div class="input-group"><label>Branch <span>(optional)</span></label><input type="text" id="bankBranch"></div></div></div><div class="card"><div class="payment-header"><h3>💳 Online Payments <span class="via">via Snippe</span></h3> <span class="badge">Enabled</span></div><p class="sub">Mobile Money, Card & QR Code</p><div class="alert">Get your API key from snippe.sh</div><div class="input-group"><label>API Key</label><input type="text" id="apiKey"></div><label class="checkbox"><input type="checkbox" id="mpesa" checked> <b>Mobile Money</b></label><label class="checkbox"><input type="checkbox" id="card" checked> <b>Card Payments</b></label><label class="checkbox"><input type="checkbox" id="qr" checked> <b>QR Code</b></label><button class="btn-save" onclick="savePayments()">Save Payment Settings</button></div></div>
+  <!-- 1. BIDHAA MPYA NA MAELEZO + BEI YA PUNGUZO -->
+  <div class="card">
+    <h2 class="card-title">Ongeza Bidhaa Mpya</h2>
+    <div class="grid-2">
+      <div class="input-group"><label>Jina la Bidhaa</label><input type="text" id="bidhaaJina" placeholder="Lulu Cosmetics"></div>
+      <div class="input-group"><label>Category</label><input type="text" id="bidhaaCategory" placeholder="COSMETICS, USO"></div>
+    </div>
+    <div class="grid-3">
+      <div class="input-group"><label>Bei Mpya Tsh</label><input type="number" id="bidhaaBei" placeholder="24900"></div>
+      <div class="input-group"><label>Bei ya Zamani Tsh</label><input type="number" id="bidhaaBeiZamani" placeholder="29900"></div>
+      <div class="input-group"><label>SKU / Code</label><input type="text" id="bidhaaSKU" placeholder="PW-001"></div>
+    </div>
+    <div class="input-group"><label>Link ya Picha</label><input type="text" id="bidhaaPicha" placeholder="https://..."></div>
+    <div class="input-group"><label>Maelezo ya Bidhaa</label><textarea id="bidhaaMaelezo" placeholder="High-quality premium service for professional use..."></textarea></div>
+    <button class="btn-primary" onclick="addBidhaa()">WEKA BIDHAA</button>
   </div>
+
+  <!-- 2. DELIVERY -->
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title" style="margin:0;">Delivery Methods</h2>
+      <button class="btn-primary" style="width:auto; padding:10px 18px;" onclick="document.getElementById('deliveryForm').style.display='block'">+ Add Method</button>
+    </div>
+    <table id="deliveryTable"><tr><th>METHOD</th><th>FEE</th><th>ACTION</th></tr></table>
+    <div id="deliveryForm" style="display:none; margin-top:20px;">
+      <div class="grid-2"><div class="input-group"><label>Jina la Delivery</label><input type="text" id="delMethod" placeholder="Dar es Salaam Delivery"></div><div class="input-group"><label>Gharama TZS</label><input type="number" id="delFee" placeholder="3000"></div></div>
+      <div class="input-group"><label>Maelezo</label><input type="text" id="delDesc" placeholder="Delivery within Dar city"></div>
+      <button class="btn-primary" onclick="addDelivery()">Hifadhi</button>
+    </div>
+  </div>
+
+  <!-- 3. PAYMENT SETTINGS -->
+  <div class="card">
+    <h2 class="card-title">Payment Settings</h2>
+    <div class="card-header"><div><h3>💵 Cash on Delivery</h3><p style="font-size:13px; color:var(--muted);">Buyer pays cash when order arrives</p></div><div style="display:flex; align-items:center; gap:10px;"><span class="switch-label" id="codLabel">Disabled</span><div class="toggle" id="codToggle" onclick="toggleSetting('cod')"></div></div></div>
+    <div class="input-group"><label>Instructions for buyer</label><input type="text" id="codInstructions" placeholder="e.g. Have exact change ready"></div>
+
+    <div class="card-header" style="margin-top:25px;"><div><h3>🏦 Bank Transfer</h3><p style="font-size:13px; color:var(--muted);">Buyer transfers money to your account</p></div><div style="display:flex; align-items:center; gap:10px;"><span class="switch-label" id="bankLabel">Disabled</span><div class="toggle" id="bankToggle" onclick="toggleSetting('bank')"></div></div></div>
+    <div class="grid-2"><div class="input-group"><label>Bank Name</label><input type="text" id="bankName" placeholder="e.g. CRDB Bank"></div><div class="input-group"><label>Account Name</label><input type="text" id="bankAccountName"></div></div>
+    <div class="grid-2"><div class="input-group"><label>Account Number</label><input type="text" id="bankAccountNumber"></div><div class="input-group"><label>Branch</label><input type="text" id="bankBranch"></div></div>
+
+    <div class="card-header" style="margin-top:25px;"><div><h3>💳 Online Payments <span style="background:#E8F5E9; color:var(--green); padding:2px 8px; border-radius:6px; font-size:12px;">via Snippe</span></h3><p style="font-size:13px; color:var(--muted);">Mobile Money, Card & QR Code</p></div><div style="display:flex; align-items:center; gap:10px;"><span class="switch-label" id="onlineLabel">Disabled</span><div class="toggle" id="onlineToggle" onclick="toggleSetting('online')"></div></div></div>
+    <div class="alert">Get your API key from snippe.sh → Dashboard → API Keys</div>
+    <div class="input-group"><label>API Key</label><input type="text" id="snippeApiKey" placeholder="snp_..."></div>
+    <p style="font-weight:600; margin:10px 0;">Enable payment methods</p>
+    <label><input type="checkbox" id="payMobile"> Mobile Money - M-Pesa, Airtel, Tigo</label><br>
+    <label><input type="checkbox" id="payCard"> Card Payments - Visa & Mastercard</label><br>
+    <label><input type="checkbox" id="payQR"> QR Code - NMB, CRDB QR</label>
+    <button class="btn-green" style="margin-top:20px; width:100%;" onclick="savePaymentSettings()">Save Payment Settings</button>
+  </div>
+
+  <!-- 4. BIDHAA ZILIZOPO -->
+  <div class="card">
+    <h2 class="card-title">Bidhaa Zilizopo</h2>
+    <table id="adminList"><tr><th>Picha</th><th>Jina</th><th>Bei</th><th>Sale</th><th>Action</th></tr></table>
+  </div>
+
 </div>
-
-<div class="modal-bg" id="bidhaaModal"><div class="modal"><h3>Ongeza Bidhaa</h3><div class="input-group"><label>Jina</label><input id="bidhaaJina"></div><div class="input-group"><label>Bei</label><input id="bidhaaBei" type="number"></div><div class="input-group"><label>Picha URL</label><input id="bidhaaPicha"></div><div><button class="btn-neon" onclick="addBidhaa()">Hifadhi</button><button class="btn-danger" onclick="closeModal('bidhaaModal')">Funga</button></div></div></div>
-<div class="modal-bg" id="catModal"><div class="modal"><h3>Ongeza Category</h3><div class="input-group"><label>Jina</label><input id="catName"></div><div class="input-group"><label>Picha URL</label><input id="catImage"></div><div><button class="btn-neon" onclick="saveCategory()">Hifadhi</button><button class="btn-danger" onclick="closeModal('catModal')">Funga</button></div></div></div>
-<div class="modal-bg" id="delModal"><div class="modal"><h3>Ongeza Delivery</h3><div class="input-group"><label>Jina</label><input id="delName"></div><div class="input-group"><label>Fee</label><input id="delFee" type="number"></div><div><button class="btn-neon" onclick="saveDelivery()">Hifadhi</button><button class="btn-danger" onclick="closeModal('delModal')">Funga</button></div></div></div>
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
-<script src="admin.js"></script>
+<script>
+const firebaseConfig = {apiKey: "AIzaSyDbYznd_wEyJPr_r1mnvUEy651QPhhk4TI",authDomain: "teknova-3688d.firebaseapp.com",databaseURL: "https://teknova-3688d-default-rtdb.firebaseio.com",projectId: "teknova-3688d"};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database(); const auth = firebase.auth();
+
+function adminLogin(){auth.signInWithEmailAndPassword(adminEmail.value, adminPass.value).then(()=>{loginPage.style.display='none';adminPanel.style.display='block';loadAll();}).catch(()=>{loginError.innerText="Email au Password sio sahihi";});}
+function logoutAdmin(){auth.signOut().then(()=>location.reload())}
+
+// BIDHAA NA PUNGUZO
+function addBidhaa(){
+  const bei = Number(bidhaaBei.value); const beiZamani = Number(bidhaaBeiZamani.value);
+  let sale = 0; if(beiZamani > bei){ sale = Math.round(((beiZamani - bei) / beiZamani) * 100); }
+  const d={jina:bidhaaJina.value,category:bidhaaCategory.value.toUpperCase(),bei:bei,beiZamani:beiZamani,sale:sale,sku:bidhaaSKU.value,picha:bidhaaPicha.value,maelezo:bidhaaMaelezo.value};
+  if(!d.jina||!d.bei||!d.picha)return alert("Jaza Jina, Bei na Picha!");
+  db.ref('bidhaa').push(d).then(()=>{alert("Bidhaa imeongezwa!"); document.querySelectorAll('#adminPanel input, #adminPanel textarea').forEach(i=>i.value="")})
+}
+function loadAdmin(){db.ref('bidhaa').on('value',snap=>{let h="<tr><th>Picha</th><th>Jina</th><th>Bei</th><th>Sale</th><th>Action</th></tr>";if(snap.val())Object.keys(snap.val()).forEach(k=>{let b=snap.val()[k];h+=`<tr><td><img src="${b.picha}" style="width:50px; height:50px; object-fit:contain; background:#fff; padding:3px; border-radius:6px;"></td><td>${b.jina}</td><td>Tsh ${Number(b.bei).toLocaleString()}</td><td>${b.sale>0?`<span class="badge-sale">-${b.sale}%</span>`:'-'}</td><td><button class="btn-danger" onclick="db.ref('bidhaa/${k}').remove()">Delete</button></td></tr>`});adminList.innerHTML=h})}
+
+// DELIVERY
+function addDelivery(){if(!delMethod.value||!delFee.value||!delDesc.value)return alert("Jaza zote!");db.ref('delivery').push({method:delMethod.value,fee:delFee.value,desc:delDesc.value}).then(()=>{alert("Delivery imeongezwa!");deliveryForm.style.display='none';})}
+function loadDelivery(){db.ref('delivery').on('value',snap=>{let h="<tr><th>METHOD</th><th>FEE</th><th>ACTION</th></tr>";if(snap.val())Object.keys(snap.val()).forEach(k=>{let d=snap.val()[k];h+=`<tr><td><b>${d.method}</b></td><td>TZS ${Number(d.fee).toLocaleString()}</td><td><button class="btn-danger" onclick="db.ref('delivery/${k}').remove()">Delete</button></td></tr>`});deliveryTable.innerHTML=h})}
+
+// PAYMENT
+function toggleSetting(type){let toggle=document.getElementById(type+'Toggle');let label=document.getElementById(type+'Label');toggle.classList.toggle('active');let status=toggle.classList.contains('active')?'Enabled':'Disabled';label.innerText=status;db.ref('settings/payment/'+type+'/enabled').set(status==='Enabled');}
+function savePaymentSettings(){const data={cod:{enabled:codToggle.classList.contains('active'),instructions:codInstructions.value},bank:{enabled:bankToggle.classList.contains('active'),name:bankName.value,accountName:bankAccountName.value,accountNumber:bankAccountNumber.value,branch:bankBranch.value},online:{enabled:onlineToggle.classList.contains('active'),apiKey:snippeApiKey.value,methods:{mobile:payMobile.checked,card:payCard.checked,qr:payQR.checked}}};db.ref('settings/payment').set(data).then(()=>alert('Payment Settings zimehifadhiwa 100%!'));}
+function loadSettings(){db.ref('settings/payment').on('value',snap=>{const s=snap.val();if(!s)return;if(s.cod){codToggle.classList.toggle('active',s.cod.enabled);codLabel.innerText=s.cod.enabled?'Enabled':'Disabled';codInstructions.value=s.cod.instructions||'';}if(s.bank){bankToggle.classList.toggle('active',s.bank.enabled);bankLabel.innerText=s.bank.enabled?'Enabled':'Disabled';bankName.value=s.bank.name||'';bankAccountName.value=s.bank.accountName||'';bankAccountNumber.value=s.bank.accountNumber||'';bankBranch.value=s.bank.branch||'';}if(s.online){onlineToggle.classList.toggle('active',s.online.enabled);onlineLabel.innerText=s.online.enabled?'Enabled':'Disabled';snippeApiKey.value=s.online.apiKey||'';payMobile.checked=s.online.methods?.mobile||false;payCard.checked=s.online.methods?.card||false;payQR.checked=s.online.methods?.qr||false;}})}
+function loadAll(){loadAdmin();loadDelivery();loadSettings();}
+auth.onAuthStateChanged(user=>{if(user){loginPage.style.display='none';adminPanel.style.display='block';loadAll();}})
+</script>
 </body>
 </html>
