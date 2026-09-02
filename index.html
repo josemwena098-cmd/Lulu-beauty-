@@ -12,7 +12,7 @@
   <nav>
     <h2 class="logo">LULU BEAUTY</h2>
     <ul>
-      <li><a href="#">Nyumbani</a></li>
+      <li><a href="#" onclick="backToHome()">Nyumbani</a></li>
       <li><a href="#bidhaa">Bidhaa</a></li>
       <li><a href="https://wa.me/255724331379" target="_blank">Wasiliana</a></li>
     </ul>
@@ -28,7 +28,6 @@
 </section>
 
 <main class="container">
-  <!-- BANNER YA KUNUNUA -->
   <div class="promo-banner">
     <span class="badge"><span>⚡</span> WAPYA WALIOWASILI</span>
     <h2>Nunua katika Lulu Beauty</h2>
@@ -46,20 +45,27 @@
   <div id="bidhaaGrid" class="grid"><p style="text-align:center;">Inapakia bidhaa kutoka database...</p></div>
 </main>
 
+<!-- PAGE MPYA YA NDANI YA BIDHAA - HII NDO IMEONGEZWA -->
+<div id="productDetailPage" style="display:none;">
+  <div class="container">
+    <button class="back-btn-detail" onclick="backToHome()">← Rudi Nyuma</button>
+    <div class="detail-card" id="detailContent"></div>
+  </div>
+</div>
+
 <a href="https://wa.me/255724331379" target="_blank" class="whatsapp-float">
   <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
 </a>
 
 <footer>
-  <p>© 2026 LULU BEAUTY. Vipodozi Bora Mbeya. | WhatsApp: 0724 331 379</p>
+  <p>© 2026 LULU BEAUTY. Vipodozi Bora Mbeya.</p>
+  <button class="btn-footer" onclick="window.location.href='https://wa.me/255724331379'">Wasiliana Nasi</button>
 </footer>
 
-<!-- POPUP YA LOGIN IMEFIXIWA -->
 <div id="loginPopup" class="popup-overlay">
   <div class="popup-box">
     <span class="close-btn" onclick="closePopup()">&times;</span>
     <h3>LOGIN</h3>
-
     <div class="input-group">
       <input type="email" id="loginEmail" placeholder="Email or username" required>
     </div>
@@ -67,11 +73,8 @@
       <input type="password" id="loginPassword" placeholder="Password" required>
     </div>
     <button class="btn-login-main" onclick="loginWithEmailNew()">Ingia</button>
-
     <div class="divider">OR</div>
-
     <div class="social-login">
-      <!-- HAPA NDIO NIMEFIX LINK YA GOOGLE -->
       <button class="btn-social btn-google" onclick="loginWithGoogle()">
         <img src="https://www.google.com/favicon.ico" alt="Google">
       </button>
@@ -79,7 +82,6 @@
   </div>
 </div>
 
-<!-- SCRIPT ZA FIREBASE -->
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
