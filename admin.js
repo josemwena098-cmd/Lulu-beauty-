@@ -1,49 +1,78 @@
-const firebaseConfig = { apiKey: "AIzaSyDbYznd_wEyJPr_r1mnvUEy651QPhhk4TI", databaseURL: "https://teknova-3688d-default-rtdb.firebaseio.com" };
-firebase.initializeApp(firebaseConfig); 
+const firebaseConfig = {
+  apiKey: "AIzaSyDbYznd_wEyJPr_r1mnvUEy651QPhhk4TI",
+  authDomain: "teknova-3688d.firebaseapp.com",
+  databaseURL: "https://teknova-3688d-default-rtdb.firebaseio.com",
+  projectId: "teknova-3688d",
+  storageBucket: "teknova-3688d.firebasestorage.app",
+  messagingSenderId: "1030215294939",
+  appId: "1:1030215294939:web:4d82493402600f4285d1fe"
+};
+firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
-const auth = firebase.auth();
 
-// CHECK KAMA AMEINGIA TAYARI
-auth.onAuthStateChanged(user => {
-  if(user){
-    document.getElementById('loginPage').style.display = 'none';
-    document.getElementById('adminPanel').style.display = 'block';
-    loadAllData(); // pakua data zote
-  } else {
-    document.getElementById('loginPage').style.display = 'flex';
-    document.getElementById('adminPanel').style.display = 'none';
-  }
+let allProducts = {};
+
+// KUPAKIA BIDHAA
+db.ref('bidhaa').on('value', snap => {
+  allProducts = snap.val() || {};
+  loadCategories();
+  displayProducts('ZOTE');
 });
 
-// LOGIN FUNCTION
-function adminLogin(){
-  const email = document.getElementById('adminEmail').value;
-  const pass = document.getElementById('adminPass').value;
-  auth.signInWithEmailAndPassword(email, pass)
-  .catch(err => document.getElementById('loginError').innerText = "❌ " + err.message);
+// KUPAKIA CATEGORIES KI AUTOMATIC
+function loadCategories(){
+  const catDiv = document.getElementById('categoryButtons');
+  let categories = ['ZOTE'];
+  Object.values(allProducts).forEach(b => {
+    if(b.category &&!categories.includes(b.category)){
+      categories.push(b.category);
+    }
+  })
+  catDiv.innerHTML = '';
+  categories.forEach(cat => {
+    catDiv.innerHTML += `<button class="cat-btn" onclick="filterCategory('${cat}')">${cat}</button>`;
+  })
 }
 
-// LOGOUT
-function adminLogout(){ auth.signOut(); }
-
-// ZINGINE ZOTE NI ILE ILE
-function toggleMenu(){ document.getElementById('sidebar').classList.toggle('active'); }
-function showPage(page, el){ document.querySelectorAll('.page').forEach(p => p.style.display = 'none'); document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active')); document.getElementById(page).style.display = 'block'; el.classList.add('active'); document.getElementById('pageTitle').innerText = el.innerText; if(window.innerWidth < 900) toggleMenu(); }
-function openModal(id){ document.getElementById(id).style.display = 'flex'; }
-function closeModal(id){ document.getElementById(id).style.display = 'none'; }
-
-function loadAllData(){
-  // BIDHAA
-  db.ref('bidhaa').on('value', snap => { let html = ""; let count=0; snap.forEach(c => { count++; let b = c.val(); html += `<tr><td><img src="${b.picha}" width="50" style="border-radius:8px"></td><td>${b.jina}</td><td>Tsh ${Number(b.bei).toLocaleString()}</td><td><button class="btn-danger" onclick="db.ref('bidhaa/${c.key}').remove()">Futa</button></td></tr>` }); bidhaaTable.innerHTML = html; totalProducts.innerText = count; });
-  // CATEGORY
-  db.ref('categories').on('value', snap => { let html = ""; let count=0; snap.forEach(c => { count++; let x = c.val(); html += `<tr><td><img src="${x.image}" width="50" style="border-radius:8px"></td><td>${x.name}</td><td><button class="btn-danger" onclick="db.ref('categories/${c.key}').remove()">Futa</button></td></tr>` }); catTable.innerHTML = html; totalCategories.innerText = count; });
-  // DELIVERY
-  db.ref('delivery').on('value', snap => { let html = ""; snap.forEach(c => { let d = c.val(); html += `<tr><td>${d.name}</td><td>Tsh ${Number(d.fee).toLocaleString()}</td><td><button class="btn-danger" onclick="db.ref('delivery/${c.key}').remove()">Futa</button></td></tr>` }); delTable.innerHTML = html });
-  // PAYMENT LOAD
-  db.ref('settings/payment').on('value', snap => { if(snap.exists()){ let d = snap.val(); bankName.value = d.bank?.name || ''; bankAccName.value = d.bank?.accName || ''; bankAcc.value = d.bank?.acc || ''; bankBranch.value = d.bank?.branch || ''; apiKey.value = d.online?.apiKey || ''; mpesa.checked = d.online?.mpesa || false; card.checked = d.online?.card || false; qr.checked = d.online?.qr || false; }});
+// KUONYESHA BIDHAA
+function displayProducts(category){
+  const grid = document.getElementById('bidhaaGrid');
+  grid.innerHTML = '';
+  Object.keys(allProducts).forEach(key => {
+    let b = allProducts[key];
+    if(category === 'ZOTE' || b.category === category){
+      grid.innerHTML += `
+      <div class="product-card">
+        <img src="${b.picha}" alt="${b.jina}">
+        <div class="product-info">
+          <h3>${b.jina}</h3>
+          <p class="price">Tsh ${Number(b.bei).toLocaleString()}</p>
+          <a href="https://wa.me/255724331379?text=Niaje%20nataka%20${b.jina}" target="_blank" class="btn-hero" style="padding:10px 15px; font-size:14px;">Nunua WhatsApp</a>
+        </div>
+      </div>`;
+    }
+  })
 }
 
-function addBidhaa(){ db.ref('bidhaa').push({jina:bidhaaJina.value, bei:bidhaaBei.value, picha:bidhaaPicha.value}); alert("✅ Imeongezwa"); closeModal('bidhaaModal'); bidhaaJina.value=''; bidhaaBei.value=''; bidhaaPicha.value=''; }
-function saveCategory(){ db.ref('categories').push({name:catName.value, image:catImage.value}); alert("✅ Imehifadhiwa"); closeModal('catModal'); catName.value=''; catImage.value=''; }
-function saveDelivery(){ db.ref('delivery').push({name:delName.value, fee:delFee.value}); alert("✅ Imehifadhiwa"); closeModal('delModal'); delName.value=''; delFee.value=''; }
-function savePayments(){ const data = { bank: { name: bankName.value, accName: bankAccName.value, acc: bankAcc.value, branch: bankBranch.value }, online: { apiKey: apiKey.value, mpesa: mpesa.checked, card: card.checked, qr: qr.checked } }; db.ref('settings/payment').set(data).then(()=> alert("✅ Payment Settings Zimehifadhiwa")); }
+function filterCategory(cat){
+  displayProducts(cat);
+  document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+// KUPAKIA DELIVERY METHODS
+db.ref('delivery').on('value', snap => {
+  const data = snap.val();
+  const delDiv = document.getElementById('deliveryList');
+  delDiv.innerHTML = '';
+  if(data){
+    Object.values(data).forEach(d => {
+      delDiv.innerHTML += `
+      <div class="delivery-card">
+        <h3>${d.method}</h3>
+        <p>${d.desc}</p>
+        <p><b>Gharama: Tsh ${Number(d.fee).toLocaleString()}</b></p>
+      </div>`;
+    })
+  }
+})
